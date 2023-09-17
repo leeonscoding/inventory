@@ -4,6 +4,8 @@ import com.leeonscoding.inventory.api.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,7 +57,11 @@ public class ContactController {
     @CrossOrigin
     @GetMapping("/{type}")
     public ResponseEntity<ContactsOutput> list(@NotNull @PathVariable ContactType type,
-                                               ContactListRequestParam contactListRequestParam) throws ApiException {
+                                               ContactListRequestParam contactListRequestParam,
+                                               @AuthenticationPrincipal OAuth2User principal) throws ApiException {
+
+        var attributes = principal.getAttributes();
+
         List<Contact> contactList = contactService.list(type, contactListRequestParam);
 
         long totalSize = contactService.totalSize(type, contactListRequestParam);

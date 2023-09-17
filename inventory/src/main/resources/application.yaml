@@ -13,3 +13,18 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: 2tvmbT4eu7JKYMQd5HSOK482hLemlmOC
+            client-secret: eIDHo45C9YmIfZm0TSTrkTKFBIsVgJKJKtQNkCrtzOrfcGDQ2vJEeR-IhQcT-t58
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://dev-leeonscoding.us.auth0.com/

@@ -18,7 +18,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/{type}")
+    @PostMapping
     public ResponseEntity<HttpStatus> addProduct(@RequestBody AddProductInput addProductInput) throws ApiException {
         long productId = productService.addProduct(addProductInput);
 

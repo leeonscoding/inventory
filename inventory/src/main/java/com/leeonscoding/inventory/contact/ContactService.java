@@ -17,4 +17,6 @@ public interface ContactService {
     Contact getOne(ContactType type, long id) throws ApiException;
 
     List<Contact> list(ContactType type, ContactListRequestParam param) throws ApiException;
+
+    long totalSize(ContactType type, ContactListRequestParam param) throws ApiException;
 }

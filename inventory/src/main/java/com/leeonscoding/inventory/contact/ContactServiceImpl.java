@@ -99,7 +99,7 @@ public class ContactServiceImpl implements ContactService{
 
         List<Contact> contactList;
 
-        if(!token.isEmpty()) {
+        if(token != null && !token.isEmpty()) {
             contactList = contactRepository
                     .findAll(
                             ContactSpecifications.emailLike(token)
@@ -114,5 +114,24 @@ public class ContactServiceImpl implements ContactService{
         }
 
         return contactList;
+    }
+
+    @Override
+    public long totalSize(ContactType type, ContactListRequestParam param) throws ApiException {
+        String token = param.searchToken();
+
+        long size;
+
+        if(token != null && !token.isEmpty()) {
+            size = contactRepository
+                    .count(
+                            ContactSpecifications.emailLike(token)
+                                    .or(ContactSpecifications.nameLike(token))
+                                    .or(ContactSpecifications.phoneLike(token))
+                    );
+        } else {
+            size = contactRepository.count();
+        }
+        return size;
     }
 }

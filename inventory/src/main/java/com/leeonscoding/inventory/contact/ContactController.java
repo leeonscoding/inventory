@@ -18,6 +18,7 @@ public class ContactController {
         this.contactService = contactService;
     }
 
+    @CrossOrigin
     @PostMapping("/{type}")
     public ResponseEntity<HttpStatus> addContact(@NotNull @PathVariable ContactType type,
                                                  @RequestBody AddContactInput addContactInput) throws ApiException {
@@ -51,12 +52,15 @@ public class ContactController {
     }
 
 
+    @CrossOrigin
     @GetMapping("/{type}")
     public ResponseEntity<ContactsOutput> list(@NotNull @PathVariable ContactType type,
                                                ContactListRequestParam contactListRequestParam) throws ApiException {
         List<Contact> contactList = contactService.list(type, contactListRequestParam);
 
-        return new ResponseEntity<>(new ContactsOutput(contactList), HttpStatus.OK);
+        long totalSize = contactService.totalSize(type, contactListRequestParam);
+
+        return new ResponseEntity<>(new ContactsOutput(contactList, totalSize), HttpStatus.OK);
     }
 
 }

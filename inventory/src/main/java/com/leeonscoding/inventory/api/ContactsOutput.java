@@ -5,5 +5,5 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public record ContactsOutput(List<Contact> contacts) {
+public record ContactsOutput(List<Contact> contacts, long totalSize) {
 }

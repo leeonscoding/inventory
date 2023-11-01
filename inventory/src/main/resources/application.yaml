@@ -18,8 +18,8 @@ spring:
       client:
         registration:
           auth0:
-            client-id: 2tvmbT4eu7JKYMQd5HSOK482hLemlmOC
-            client-secret: eIDHo45C9YmIfZm0TSTrkTKFBIsVgJKJKtQNkCrtzOrfcGDQ2vJEeR-IhQcT-t58
+            client-id: test
+            client-secret: test
             scope:
               - openid
               - profile
